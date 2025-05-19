@@ -1,84 +1,91 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: Arial, sans-serif;
 }
 
 body {
-    background-color: white;
+background-color: white;
 }
 
 .header {
-    background-color: #8000FF;
-    color: black;
-    padding: 15px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+background-color: #8000ff;
+color: black;
+padding: 20px;
+font-size: 28px;
+font-weight: 700;
+font-style: italic;
 }
 
 .container {
-    display: flex;
+display: flex;
 }
 
-.sidebar {
-    background-color: white;
-    padding: 20px;
-    width: 250px;
+.sidebar ul{
+padding: 20px;
+width: 250px;
+list-style: none;
+}
+
+.ul li a {
+text-decoration: none;
+color: white;
+list-style: none;
 }
 
 .sidebar p {
-    font-size: 20px;
-    margin-bottom: 20px;
+font-size: 20px;
+margin-bottom: 20px;
 }
 
 .sidebar button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    background-color: grey;
-    border: none;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
+display: block;
+width: 100%;
+padding: 10px;
+margin-bottom: 15px;
+background-color: grey;
+border: none;
+color: white;
+font-size: 16px;
+border-radius: 5px;
+cursor: pointer;
 }
 
 .sidebar button:hover {
-    background-color: #555;
+background-color: #555;
 }
 
 .main-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
-    width: 100%;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+align-items: center;
+padding: 20px;
+width: 100%;
 }
 
 .card {
-    width: 180px;
-    height: 120px;
-    background-color: white;
-    margin: 20px;
-    text-align: center;
-    padding-top: 20px;
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
-    border-radius: 10px;
+width: 180px;
+height: 120px;
+background-color: white;
+margin: 20px;
+text-align: center;
+padding-top: 20px;
+box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+border-radius: 10px;
 }
 
 .card h2 {
-    font-size: 30px;
-    margin-bottom: 10px;
+font-size: 30px;
+margin-bottom: 10px;
 }
 
 .card p {
-    font-size: 18px;
-    font-weight: bold;
+font-size: 18px;
+font-weight: bold;
 }
 
 .highlighted {
-    border: 2px solid #8000FF;
+border: 2px solid #8000FF;
 }

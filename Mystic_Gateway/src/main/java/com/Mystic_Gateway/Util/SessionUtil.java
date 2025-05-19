@@ -5,15 +5,25 @@ import jakarta.servlet.http.HttpSession;
 
 public class SessionUtil {
 
-    // Set user details in session with a 2-minute inactivity timeout
-    public static void setUserSession(HttpServletRequest request, String username, String fullname, String email) {
-        HttpSession session = request.getSession();
-        session.setAttribute("username", username);
-        session.setAttribute("fullname", fullname);
-        session.setAttribute("email", email);
 
-        // Set session timeout (in seconds) for inactivity - 2 minutes
-        session.setMaxInactiveInterval(120); // 120 seconds = 2 minutes
+    // Set session for Admin
+    public static void setAdminSession(HttpServletRequest request, int adminId, String username, String fullName, String email) {
+        HttpSession session = request.getSession();
+        session.setAttribute("adminId", adminId);
+        session.setAttribute("username", username);
+        session.setAttribute("email", email);
+        session.setAttribute("fullName", fullName);
+        session.setMaxInactiveInterval(900); // 18 minutes
+    }
+    
+ // Set session for Customer
+    public static void setUserSession(HttpServletRequest request, int customerId, String username, String fullName, String email) {
+        HttpSession session = request.getSession();
+        session.setAttribute("customerId", customerId);
+        session.setAttribute("username", username);
+        session.setAttribute("fullName", fullName);
+        session.setAttribute("email", email);
+        session.setMaxInactiveInterval(1200); // 20 minutes
     }
 
     // Destroy session (for logout)
@@ -36,15 +46,35 @@ public class SessionUtil {
         return (session != null) ? (String) session.getAttribute("username") : null;
     }
 
-    // Get the fullname from the session
+    // Get the full name from the session
     public static String getFullname(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        return (session != null) ? (String) session.getAttribute("fullname") : null;
+        return (session != null) ? (String) session.getAttribute("fullName") : null;
     }
 
     // Get the email from the session
     public static String getEmail(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         return (session != null) ? (String) session.getAttribute("email") : null;
+    }
+
+    // Get the user type (admin or customer)
+    public static String getUserType(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        return (session != null) ? (String) session.getAttribute("userType") : null;
+    }
+
+    // Get the customer ID (if customer)
+    public static Integer getCustomerId(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        return (session != null && session.getAttribute("customerId") != null)
+            ? (Integer) session.getAttribute("customerId") : null;
+    }
+
+    // Get the admin ID (if admin)
+    public static Integer getAdminId(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        return (session != null && session.getAttribute("adminId") != null)
+            ? (Integer) session.getAttribute("adminId") : null;
     }
 }

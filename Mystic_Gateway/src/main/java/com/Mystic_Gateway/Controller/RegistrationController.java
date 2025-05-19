@@ -1,3 +1,4 @@
+
 package com.Mystic_Gateway.Controller;
 
 import java.io.IOException;
@@ -87,12 +88,17 @@ public class RegistrationController extends HttpServlet {
 
         // Use RegisterService to handle database logic
         try {
-            String result = RegisterService.registerUser(firstName, lastName, username, birthday, phone, email, password);
+            int customerId = RegisterService.registerUser(firstName, lastName, username, birthday, phone, email, password);
 
-            if ("success".equals(result)) {
+            if (customerId != -1) {
+                // Store customer_id in session
+                request.getSession().setAttribute("customerId", customerId);
+
+                // Show success message and forward to login page
                 request.setAttribute("successMessage", "Registration successful!");
                 request.getRequestDispatcher("/WEB-INF/Pages/Login.jsp").forward(request, response);
             } else {
+                // Show failure message
                 request.setAttribute("errorMessage", "Failed to register user.");
                 request.getRequestDispatcher("/WEB-INF/Pages/Registration.jsp").forward(request, response);
             }
@@ -131,4 +137,3 @@ public class RegistrationController extends HttpServlet {
                 password.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
     }
 }
-

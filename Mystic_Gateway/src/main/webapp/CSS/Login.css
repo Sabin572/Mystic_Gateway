@@ -128,7 +128,7 @@ button {
     color: white;
     padding: 12px;
     width: 50%;
-    margin-left: 10rem;
+    margin-left: 12rem;
     justify-content: center;
     align-items: center;
     border: none;
@@ -167,7 +167,7 @@ footer {
 
 /* Error message styling (for JSP validation) */
 .error-message {
-    color: #dc3545;
+    color: red;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #f5c2c7;

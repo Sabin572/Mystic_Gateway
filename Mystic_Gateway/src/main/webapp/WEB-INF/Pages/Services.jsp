@@ -30,24 +30,16 @@
     <h2><b>Our Services</b></h2>
   </div>
   <div class="deal-container">
-  	<div class="deal-card">
-        <a href="Destination.html"><img src="${pageContext.request.contextPath}/Resources/destination_icon.png" alt="destination_icon" width="110px"></a>
-        <p>Travel Booking</p>
-    </div>
     <div class="deal-card">
-        <a href="Flight.html"><img src="${pageContext.request.contextPath}/Resources/airplane-ticket.png" alt="Flights" width="110px"></a>
+        <a href="BookFlight"><img src="${pageContext.request.contextPath}/Resources/airplane-ticket.png" alt="Flights" width="110px"></a>
         <p>Flight Booking</p>
     </div>
     <div class="deal-card">
-      <a href="Vehicle.html"><img src="${pageContext.request.contextPath}/Resources/car.png" alt="Flights" width="110px"></a>
+      <a href="BookVehicle"><img src="${pageContext.request.contextPath}/Resources/car.png" alt="Flights" width="110px"></a>
       <p>Rent a vehicle</p>
   </div>
     <div class="deal-card">
-      <a href="Hotel.html"><img src="${pageContext.request.contextPath}/Resources/city.png" alt="Flights" width="110px"></a>
+      <a href="HotelBooking"><img src="${pageContext.request.contextPath}/Resources/city.png" alt="Flights" width="110px"></a>
         <p>Hotels Reservations</p>
-    </div>
-    <div class="deal-card">
-      <img src="${pageContext.request.contextPath}/Resources/tour-guide.png" alt="Flights" width="110px">
-        <p>Tour Guide for Trekking</p>
     </div>
 </div>

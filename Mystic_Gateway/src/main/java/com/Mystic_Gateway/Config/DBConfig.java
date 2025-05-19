@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * It handles the connection to a MySQL database using JDBC.
  */
 public class DBConfig {
-    private static final String URL = "jdbc:mysql://localhost:3306/user_registration";
+    private static final String URL = "jdbc:mysql://localhost:3306/travel-mystic-gateway";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
 

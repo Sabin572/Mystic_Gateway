@@ -9,20 +9,22 @@ import java.io.IOException;
 import java.sql.*;
 
 import com.Mystic_Gateway.Util.SessionUtil;
-import org.mindrot.jbcrypt.BCrypt; // ✅ Make sure you import this
+import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/Login" })
 public class LoginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/user_registration";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/travel-mystic-gateway";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/Pages/Login.jsp").forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username").trim();
         String password = request.getParameter("password").trim();
@@ -31,30 +33,56 @@ public class LoginController extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-                String sql = "SELECT * FROM registration WHERE username = ?";
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                stmt.setString(1, username);
-                ResultSet rs = stmt.executeQuery();
 
-                if (rs.next()) {
-                    String storedHashedPassword = rs.getString("password");
+                //  Admin login 
+                String adminSql = "SELECT * FROM admin WHERE username = ?";
+                try (PreparedStatement adminStmt = conn.prepareStatement(adminSql)) {
+                    adminStmt.setString(1, username);
+                    ResultSet adminRs = adminStmt.executeQuery();
 
-                    if (BCrypt.checkpw(password, storedHashedPassword)) {
-                        // ✅ Password matched, login successful
-                        String firstName = rs.getString("first_name");
-                        String lastName = rs.getString("last_name");
-                        String fullName = firstName + " " + lastName;
-                        String email = rs.getString("email");
+                    if (adminRs.next()) {
+                        String storedAdminPassword = adminRs.getString("password");
 
-                        SessionUtil.setUserSession(request, username, fullName, email);
+                        if (password.equals(storedAdminPassword)) {
+                            int adminId = adminRs.getInt("admin_id");
+                            String email = adminRs.getString("email");
 
-                        request.getRequestDispatcher("/WEB-INF/Pages/Home.jsp").forward(request, response);
-                        return;
+                            SessionUtil.setUserSession(request, adminId, username, "Admin", email);
+                            response.sendRedirect(request.getContextPath() + "/Dashboard");
+                            return;
+                        } else {
+                            request.setAttribute("errorMessage", "Invalid username or password.");
+                            request.setAttribute("enteredUsername", username);
+                            request.getRequestDispatcher("/WEB-INF/Pages/Login.jsp").forward(request, response);
+                            return;
+                        }
                     }
                 }
 
-                // ❌ If no user found or password mismatch
+                //  Customer login (hashed with BCrypt)
+                String customerSql = "SELECT * FROM customer WHERE username = ?";
+                try (PreparedStatement customerStmt = conn.prepareStatement(customerSql)) {
+                    customerStmt.setString(1, username);
+                    ResultSet customerRs = customerStmt.executeQuery();
+
+                    if (customerRs.next()) {
+                        String storedPassword = customerRs.getString("password");
+
+                        if (BCrypt.checkpw(password, storedPassword)) {
+                            String fullName = customerRs.getString("first_name") + " " + customerRs.getString("last_name");
+                            String email = customerRs.getString("email");
+                            int customerId = customerRs.getInt("customer_id");
+
+                            SessionUtil.setUserSession(request, customerId, username, fullName, email);
+                            request.getRequestDispatcher("/WEB-INF/Pages/Home.jsp").forward(request, response);
+                            return;
+                        }
+                    }
+                }
+
+                // ❌ If both admin and customer login fail
                 request.setAttribute("errorMessage", "Invalid username or password.");
+                request.setAttribute("enteredUsername", username);
                 request.getRequestDispatcher("/WEB-INF/Pages/Login.jsp").forward(request, response);
 
             } catch (SQLException e) {
@@ -62,6 +90,7 @@ public class LoginController extends HttpServlet {
                 request.setAttribute("errorMessage", "Database error: " + e.getMessage());
                 request.getRequestDispatcher("/WEB-INF/Pages/Login.jsp").forward(request, response);
             }
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "MySQL driver not found: " + e.getMessage());

@@ -25,14 +25,14 @@
   <div class="container">
         <header>
             <div class="profile-header">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" class="avatar">
+                
                 <div class="user-info">
                    <h1>${firstName} ${lastName}</h1>
             
                     <div class="stats">
                         <div class="stat-item">
                             <i class="fas fa-passport"></i>
-                            <span>12 Bookings</span>
+                            <span>${totalFlights} Flights</span>
                         </div>
                         <div class="stat-item">
                             <i class="fas fa-medal"></i>

@@ -35,27 +35,31 @@ body {
 }
 
 .sidebar {
-  background-color: #444;
-  color: white;
-  width: 180px;
-  padding: 20px;
-}
+            background-color: #444;
+            color: white;
+            width: 180px;
+            padding: 20px;
+        }
 
-.sidebar h2 {
-  font-size: 26px;
-  margin-bottom: 30px;
-}
+        .sidebar h2 {
+            font-size: 26px;
+            margin-bottom: 30px;
+        }
 
-.sidebar ul {
-  list-style: none;
-}
+        .sidebar ul {
+            list-style: none;
+        }
 
-.sidebar li {
-  margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-}
+        .sidebar li {
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+        }
 
 .main-content {
   flex: 1;
@@ -115,17 +119,17 @@ canvas {
     <aside class="sidebar">
       <h2>Travel</h2>
       <ul>
-        <li>Dashboard</li>
-        <li>Bookings</li>
-        <li>Manage Users</li>
-        <li>Manage Packages</li>
-        <li>My Profile</li>
-        <li>Log out</li>
+        <li><a href="${pageContext.request.contextPath}/Dashboard">Dashboard</a></li>
+        <li><a href="${pageContext.request.contextPath}/Booking">Bookings</a></li>
+        <li><a href="${pageContext.request.contextPath}/ManageUser">Manage Users</a></li>
+        <li><a href="${pageContext.request.contextPath}/Packages">Manage Packages</a></li>
+        <li><a href="${pageContext.request.contextPath}/AdminProfile">My Profile</a></li>
+        <li><a href="${pageContext.request.contextPath}/Login">Log out</a></li>
       </ul>
     </aside>
 
     <main class="main-content">
-      <h2 class="welcome">Welcome Welcome back, Sabin!</h2>
+      <h2 class="welcome">Welcome back, Sabin!</h2>
 
       <div class="stats">
         <div class="card">

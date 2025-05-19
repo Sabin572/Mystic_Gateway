@@ -16,6 +16,7 @@ color: black;
   align-items: center;
   background-color: #6200ea; 
   padding: 20px 40px;
+  overflow: hidden;
 }
 
 /* Navigation links */
@@ -24,7 +25,7 @@ color: black;
   text-decoration: none;
   padding-right: 1.5rem;
   font-weight: bold;
-  font-size: 1.09rem;
+  font-size: 20px;
   transition: color 0.3s ease;
 }
 

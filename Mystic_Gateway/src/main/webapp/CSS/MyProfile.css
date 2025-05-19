@@ -153,10 +153,8 @@ body, html {
 
         .sidebar {
             background: white;
-            border-radius: var(--radius);
             padding: 25px;
-            box-shadow: var(--shadow);
-            height: fit-content;
+            height: auto;
         }
 
         .nav-menu {

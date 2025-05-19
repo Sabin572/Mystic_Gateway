@@ -27,18 +27,15 @@ pageEncoding="UTF-8"%>
         <div class="form-section">
             <h2>Login Form</h2>
             <p>Enter Your Valid Credentials to enter.</p>
-         <% 
-    String errorMessage = (String) request.getAttribute("errorMessage");
-    String successMessage = (String) request.getAttribute("successMessage");
-%>
-
-<script>
-<% if (errorMessage != null) { %>
-    alert("<%= errorMessage.replaceAll("\"", "\\\\\"") %>");
-<% } else if (successMessage != null) { %>
-    alert("<%= successMessage.replaceAll("\"", "\\\\\"") %>");
-<% } %>
-</script>
+         <%
+                String errorMessage = (String) request.getAttribute("errorMessage");
+                String successMessage = (String) request.getAttribute("successMessage");
+                if (errorMessage != null) {
+            %>
+                <p class="error-message"><%= errorMessage %></p>
+            <% } else if (successMessage != null) { %>
+                <p class="success-message"><%= successMessage %></p>
+            <% } %>
          
             <form method="post" action="<%= request.getContextPath() %>/Login">
                 <div class="form-row">
